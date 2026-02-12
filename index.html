@@ -2,93 +2,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Our Little World 💕</title>
+<title>For My Valentine ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
+body {
   margin:0;
-  font-family: 'Comic Sans MS', cursive;
-  background: linear-gradient(135deg,#ff9ec4,#ffd6ec);
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
+  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat;
+  font-family:'Courier New',monospace;
   text-align:center;
-  overflow:hidden;
-}
-
-.container{
-  background:white;
-  padding:40px;
-  border-radius:30px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  animation:bounceIn 1s ease;
 }
 
 h1{
-  font-size:38px;
-  color:#ff4d8d;
+  font-size:40px;
+  text-shadow:2px 2px black;
 }
 
 button{
-  padding:15px 35px;
+  margin-top:20px;
+  padding:15px 30px;
+  font-size:18px;
   border:none;
-  border-radius:40px;
   background:#ff4d8d;
   color:white;
-  font-size:18px;
   cursor:pointer;
-  margin-top:20px;
+  border-radius:10px;
   transition:0.3s;
 }
 
 button:hover{
-  transform:scale(1.15) rotate(-2deg);
-}
-
-@keyframes bounceIn{
-  0%{transform:scale(0);}
-  80%{transform:scale(1.1);}
-  100%{transform:scale(1);}
-}
-
-.sparkle{
-  position:fixed;
-  font-size:20px;
-  animation:float 4s linear infinite;
-}
-
-@keyframes float{
-  to{
-    transform:translateY(-100vh);
-    opacity:0;
-  }
+  transform:scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>Hey Princess 👑</h1>
-  <p>I built a tiny world for us.</p>
-  <button onclick="go()">Enter 🌈</button>
-</div>
+<h1>FOR MY VALENTINE,<br>ALWAYS 💖</h1>
+<p>Open gently. It's meant for you.</p>
+
+<button onclick="start()">PLAY TOGETHER</button>
 
 <script>
-function go(){
-  window.location.href="page2.html";
+function start(){
+  window.location.href="desktop.html";
 }
-
-setInterval(()=>{
-  const s=document.createElement("div");
-  s.className="sparkle";
-  s.innerHTML="✨";
-  s.style.left=Math.random()*100+"vw";
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),4000);
-},500);
 </script>
 
 </body>
