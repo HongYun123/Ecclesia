@@ -2,67 +2,143 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Surprise Files</title>
+<title>Surprise Files 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 <style>
-body{
-  margin:0;
-  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat fixed;
-  font-family:'Courier New',monospace;
-  text-align:center;
-  padding-top:100px;
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url('background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  font-family: 'Press Start 2P', monospace;
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
 
-h1{
-  text-shadow:2px 2px black;
+/* Dark overlay */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
 }
 
-.folder{
-  display:inline-block;
-  margin:30px;
-  cursor:pointer;
-  transition:0.3s;
+.content {
+  position: relative;
+  z-index: 2;
 }
 
-.folder:hover{
-  transform:scale(1.1);
+h1 {
+  font-size: 22px;
+  margin-bottom: 60px;
+  text-shadow: 3px 3px 0 #000;
 }
 
-img{
-  width:80px;
+/* Folder grid */
+.folders {
+  display: grid;
+  grid-template-columns: repeat(2, 200px);
+  gap: 60px;
+  justify-content: center;
+}
+
+.folder {
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.folder img {
+  width: 100px;
+}
+
+.folder p {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.folder:hover {
+  transform: translateY(-8px);
+}
+
+/* Floating sparkles */
+.sparkle {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Surprise Files</h1>
+<div class="content">
+  <h1>Surprise Files</h1>
 
-<div class="folder" onclick="go('letter.html')">
-  <img src="https://i.imgur.com/lQbKf6k.png">
-  <p>Letter</p>
-</div>
+  <div class="folders">
+    <div class="folder" onclick="go('letter.html')">
+      <img src="folder.png">
+      <p>Letter</p>
+    </div>
 
-<div class="folder" onclick="go('photos.html')">
-  <img src="https://i.imgur.com/lQbKf6k.png">
-  <p>Our Photos</p>
-</div>
+    <div class="folder" onclick="go('photos.html')">
+      <img src="folder.png">
+      <p>Our Photos</p>
+    </div>
 
-<div class="folder" onclick="go('notes.html')">
-  <img src="https://i.imgur.com/lQbKf6k.png">
-  <p>Little Notes</p>
-</div>
+    <div class="folder" onclick="go('notes.html')">
+      <img src="folder.png">
+      <p>Little Notes</p>
+    </div>
 
-<div class="folder" onclick="go('surprise.html')">
-  <img src="https://i.imgur.com/lQbKf6k.png">
-  <p>Special Surprise</p>
+    <div class="folder" onclick="go('surprise.html')">
+      <img src="folder.png">
+      <p>Special Surprise</p>
+    </div>
+  </div>
 </div>
 
 <script>
 function go(page){
-  window.location.href=page;
+  window.location.href = page;
 }
+
+/* Sparkles */
+setInterval(() => {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.innerHTML = "✨";
+  sparkle.style.left = Math.random() * 100 + "vw";
+  sparkle.style.bottom = "-20px";
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 6000);
+}, 700);
 </script>
 
 </body>
