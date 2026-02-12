@@ -2,45 +2,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Us ❤️</title>
+<title>Reasons I Love You 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#ff7eb3,#ff758c);
+  font-family:'Comic Sans MS',cursive;
+  background:linear-gradient(135deg,#ff9ec4,#ff4d8d);
   color:white;
   text-align:center;
   padding-top:100px;
 }
-h1{
-  animation:fade 3s ease;
-}
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
-}
+
 button{
-  padding:15px 30px;
+  padding:15px 25px;
   border:none;
   border-radius:30px;
-  background:white;
-  color:#ff4d6d;
+  margin:10px;
   cursor:pointer;
+  background:white;
+  color:#ff4d8d;
+}
+
+.message{
   margin-top:30px;
+  font-size:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>I still choose you.</h1>
-<h2>Everyday. Over and over again. 💖</h2>
+<h1>Click to Reveal Reasons 💕</h1>
 
-<button onclick="next()">One More Thing...</button>
+<button onclick="show(1)">Your Smile</button>
+<button onclick="show(2)">Your Cuteness</button>
+<button onclick="show(3)">Your Personality</button>
+
+<div class="message" id="msg"></div>
+
+<br><br>
+<button onclick="next()">Final Page ➡</button>
 
 <script>
+function show(n){
+  const messages=[
+    "Your smile makes my entire day better ☀️",
+    "You’re dangerously cute and you know it 😤💖",
+    "Your personality? 10/10 wife material."
+  ];
+  document.getElementById("msg").innerText=messages[n-1];
+}
+
 function next(){
   window.location.href="page4.html";
 }
