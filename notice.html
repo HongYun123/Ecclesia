@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Things I Notice 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:url('background.jpg') center/cover fixed;
+  font-family:'Press Start 2P', monospace;
+  color:white;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* Unique dreamy overlay */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(30,0,60,0.5),
+    rgba(255,100,180,0.25)
+  );
+  backdrop-filter:blur(4px);
+  z-index:0;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  padding:80px 20px;
+}
+
+h1{
+  font-size:18px;
+  margin-bottom:60px;
+  text-shadow:3px 3px 0 black;
+}
+
+/* Memory text styling */
+.memory{
+  opacity:0;
+  transform:translateY(20px);
+  transition:1.2s ease;
+  margin:30px auto;
+  max-width:700px;
+  font-size:11px;
+  line-height:2;
+  cursor:pointer;
+}
+
+.memory.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.memory:hover{
+  color:#ff9bd6;
+  text-shadow:0 0 10px rgba(255,120,200,0.9);
+}
+
+/* Back button */
+.back{
+  margin-top:60px;
+  padding:12px 28px;
+  background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
+  border:none;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 4px 0 #a00040;
+  transition:.2s;
+}
+
+.back:hover{
+  transform:translateY(-3px);
+}
+
+/* Floating sparkles */
+.sparkle{
+  position:fixed;
+  font-size:14px;
+  animation:floatUp 8s linear infinite;
+  opacity:.7;
+  z-index:1;
+}
+
+@keyframes floatUp{
+  from{ transform:translateY(0); opacity:1; }
+  to{ transform:translateY(-120vh); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>THINGS I NOTICE ABOUT YOU 💕</h1>
+
+  <div class="memory">The way your laugh sounds when you're caught off guard.</div>
+  <div class="memory">How your eyes light up when you talk about what you love.</div>
+  <div class="memory">The way your hand fits perfectly in mine.</div>
+  <div class="memory">The tiny things you do that make ordinary moments magical.</div>
+  <div class="memory">Every memory with you feels like a favorite song.</div>
+  <div class="memory">The calm I feel just sitting next to you.</div>
+
+  <button class="back" onclick="goBack()">← Back</button>
+</div>
+
+<script>
+function goBack(){
+  window.location.href="desktop.html";
+}
+
+/* Stagger reveal animation */
+const memories = document.querySelectorAll('.memory');
+memories.forEach((el,i)=>{
+  setTimeout(()=>{
+    el.classList.add('show');
+  }, i*1200);
+});
+
+/* Floating sparkles */
+setInterval(()=>{
+  const sparkle=document.createElement("div");
+  sparkle.className="sparkle";
+  sparkle.innerHTML="✨";
+  sparkle.style.left=Math.random()*100+"vw";
+  sparkle.style.bottom="-20px";
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),8000);
+},900);
+</script>
+
+</body>
+</html>
