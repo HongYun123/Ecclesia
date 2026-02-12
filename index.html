@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For My Valentine ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #ffd6e0;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card" id="card">
+    <h1>Hey Love 💕</h1>
+    <p>I made this just for you.</p>
+    <p>Will you be my Valentine? 🌹</p>
+
+    <button class="yes" onclick="yesClicked()">YES 💖</button>
+    <button class="no" onclick="noClicked()">NO 🙈</button>
+  </div>
+
+  <script>
+    function yesClicked() {
+      document.getElementById("card").innerHTML = `
+        <h1>YAY!!! 🎉💖</h1>
+        <p>You just made me the happiest person.</p>
+        <p>I love you ❤️</p>
+        <p>Happy Valentine’s Day 🥰</p>
+      `;
+    }
+
+    function noClicked() {
+      alert("Wrong button 😜 Try again!");
+    }
+  </script>
+</body>
+</html>
