@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forever</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat fixed;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  flex-direction:column;
+  font-family:'Courier New',monospace;
+  text-align:center;
+}
+
+.heart{
+  font-size:120px;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="heart">❤️</div>
+<h2>You’re already mine.</h2>
+<p>Forever.</p>
+
+<button onclick="window.location.href='desktop.html'">Back</button>
+
+</body>
+</html>
