@@ -1,16 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scan Me 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:url('background.jpg') center/cover fixed;
+  font-family:'Press Start 2P', monospace;
+  color:white;
+  text-align:center;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(4px);
+  z-index:0;
+}
+
+h1{
+  position:relative;
+  z-index:2;
+  font-size:18px;
+  margin-bottom:40px;
+  text-shadow:3px 3px 0 black;
+}
+
+.qr-box{
+  position:relative;
+  z-index:2;
+  padding:25px;
+  background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
+  border-radius:18px;
+  box-shadow:0 0 40px rgba(255,100,180,0.7);
+  animation:pulse 2s infinite;
+}
+
+.qr-box img{
+  border-radius:12px;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+
+.back{
+  margin-top:40px;
+  padding:10px 25px;
+  background:#444;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-family:'Press Start 2P', monospace;
+  position:relative;
+  z-index:2;
+}
+.back:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Scan MEEEEE</h1>
+
 <div class="qr-box">
   <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://hongyun123.github.io/Ecclesia/index.html">
 </div>
 
-<style>
-.qr-box{
-  padding:20px;
-  background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
-  border-radius:15px;
-  display:inline-block;
-  box-shadow:0 0 25px rgba(255,100,180,0.6);
-}
-.qr-box img{
-  border-radius:10px;
-}
-</style>
+<button class="back" onclick="window.location.href='index.html'">← Back</button>
+
+</body>
+</html>
