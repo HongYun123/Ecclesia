@@ -2,46 +2,168 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>A Letter From My Heart</title>
+<title>A Letter From My Heart 💌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 <style>
-body{
-  margin:0;
-  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat fixed;
-  font-family:'Courier New',monospace;
-  padding:50px;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url('background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  font-family: 'Press Start 2P', monospace;
+  color: white;
+  overflow: hidden;
 }
 
-.box{
-  background:rgba(0,0,0,0.7);
-  padding:30px;
-  border-radius:15px;
+/* Dark overlay */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 0;
+}
+
+/* Floating letter card */
+.letter-box {
+  position: relative;
+  z-index: 2;
+  background: rgba(20, 20, 20, 0.9);
+  width: 80%;
+  max-width: 700px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 80, 140, 0.6);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+h1 {
+  font-size: 18px;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 0 #000;
+}
+
+#text {
+  font-size: 11px;
+  line-height: 2;
+  min-height: 120px;
+}
+
+/* Back button */
+.back-btn {
+  margin-top: 40px;
+  padding: 10px 25px;
+  font-size: 10px;
+  border: none;
+  background: linear-gradient(145deg,#ff4d8d,#ff2e7a);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #a00040;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-3px);
+}
+
+.back-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #a00040;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 14px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-<h2>A LETTER FROM MY HEART</h2>
-<p id="text"></p>
-<button onclick="back()">⬅ Back</button>
+<div class="letter-box">
+  <h1>A LETTER FROM MY HEART 💌</h1>
+  <div id="text"></div>
+  <button class="back-btn" onclick="goBack()">← Back</button>
 </div>
 
 <script>
-const message="My love, every day with you feels like magic. You are my peace, my laughter, my forever.";
-let i=0;
-function type(){
-  if(i<message.length){
-    document.getElementById("text").innerHTML+=message.charAt(i);
+
+/* TYPEWRITER LETTER EFFECT */
+const message = `
+My love,
+
+Every day with you feels like magic.
+You are my peace, my laughter, my forever.
+
+Even in the quiet moments,
+even across distances,
+you are the warmth in my heart.
+
+Loving you is the easiest thing I've ever done.
+And I would choose you,
+again and again,
+in every lifetime.
+`;
+
+let i = 0;
+const speed = 35;
+const textDiv = document.getElementById("text");
+
+function typeWriter() {
+  if (i < message.length) {
+    textDiv.innerHTML += message.charAt(i) === "\n" ? "<br>" : message.charAt(i);
     i++;
-    setTimeout(type,40);
+    setTimeout(typeWriter, speed);
   }
 }
-type();
 
-function back(){
+typeWriter();
+
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "-20px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 900);
+
+function goBack(){
   window.location.href="desktop.html";
 }
 </script>
