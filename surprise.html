@@ -2,25 +2,92 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Forever</title>
+<title>Be My Valentine 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat fixed;
+  height:100vh;
+  overflow:hidden;
+  background:url('background.jpg') center/cover fixed;
+  font-family:'Press Start 2P', monospace;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  flex-direction:column;
-  font-family:'Courier New',monospace;
   text-align:center;
+  color:white;
 }
 
-.heart{
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(4px);
+  z-index:0;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+}
+
+h1{
+  font-size:20px;
+  text-shadow:3px 3px 0 black;
+  margin-bottom:50px;
+}
+
+button{
+  padding:14px 28px;
+  margin:15px;
+  border:none;
+  border-radius:8px;
+  font-size:12px;
+  cursor:pointer;
+  font-family:'Press Start 2P', monospace;
+  transition:.3s;
+}
+
+.yes{
+  background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
+  color:white;
+  box-shadow:0 4px 0 #a00040;
+}
+
+.yes:hover{
+  transform:scale(1.1);
+}
+
+.no{
+  background:#444;
+  color:white;
+  position:absolute;
+}
+
+.screen{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:.8s;
+}
+
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.big-heart{
   font-size:120px;
-  animation:pulse 1s infinite;
+  animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
@@ -28,16 +95,90 @@ body{
   50%{transform:scale(1.2);}
   100%{transform:scale(1);}
 }
+
+.tease{
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+.final-text{
+  font-size:16px;
+  margin-top:20px;
+  text-shadow:0 0 15px pink;
+}
+
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-100vh); opacity:0;}
+}
 </style>
 </head>
 
 <body>
 
-<div class="heart">❤️</div>
-<h2>You’re already mine.</h2>
-<p>Forever.</p>
+<!-- SCREEN 1 -->
+<div class="screen active" id="screen1">
+  <div class="container">
+    <h1>Would You Be My Valentine? 💕</h1>
+    <button class="yes" onclick="yesClicked()">YES</button>
+    <button class="no" id="noBtn">NO</button>
+  </div>
+</div>
 
-<button onclick="window.location.href='desktop.html'">Back</button>
+<!-- SCREEN 2 TEASE -->
+<div class="screen" id="screen2">
+  <div class="container">
+    <div class="tease">Oh? You thought you had a choice? 😌</div>
+    <button class="yes" onclick="finalScreen()">Continue</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 FINAL -->
+<div class="screen" id="screen3">
+  <div class="big-heart">❤️</div>
+  <div class="final-text">
+    You’re already mine.<br><br>
+    Forever.
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", ()=>{
+  const x = Math.random() * (window.innerWidth - 150);
+  const y = Math.random() * (window.innerHeight - 80);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+function yesClicked(){
+  document.getElementById("screen1").classList.remove("active");
+  document.getElementById("screen2").classList.add("active");
+}
+
+function finalScreen(){
+  document.getElementById("screen2").classList.remove("active");
+  document.getElementById("screen3").classList.add("active");
+}
+
+/* Floating sparkles */
+setInterval(()=>{
+  const sparkle=document.createElement("div");
+  sparkle.className="sparkle";
+  sparkle.innerHTML="✨";
+  sparkle.style.left=Math.random()*100+"vw";
+  sparkle.style.bottom="-20px";
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),6000);
+},800);
+</script>
 
 </body>
 </html>
