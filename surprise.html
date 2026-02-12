@@ -95,6 +95,9 @@ button{
   50%{transform:scale(1.2);}
   100%{transform:scale(1);}
 }
+#noBtn{
+  position: absolute;
+}
 
 .tease{
   font-size:14px;
@@ -149,36 +152,41 @@ button{
 </div>
 
 <script>
+
 const noBtn = document.getElementById("noBtn");
+const screen1 = document.getElementById("screen1");
+const container = screen1.querySelector(".container");
 
-noBtn.addEventListener("mouseover", ()=>{
-  const x = Math.random() * (window.innerWidth - 150);
-  const y = Math.random() * (window.innerHeight - 80);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-});
+function moveNoSmooth() {
 
-function yesClicked(){
-  document.getElementById("screen1").classList.remove("active");
-  document.getElementById("screen2").classList.add("active");
+  const containerRect = container.getBoundingClientRect();
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const padding = 20;
+
+  // Define safe movement zone INSIDE container
+  const minX = containerRect.left + padding;
+  const maxX = containerRect.right - btnWidth - padding;
+
+  const minY = containerRect.top + 60; // below title
+  const maxY = containerRect.bottom - btnHeight - padding;
+
+  const newX = Math.random() * (maxX - minX) + minX;
+  const newY = Math.random() * (maxY - minY) + minY;
+
+  noBtn.style.transition = "all 0.35s ease";
+  noBtn.style.left = newX + "px";
+  noBtn.style.top = newY + "px";
 }
 
-function finalScreen(){
-  document.getElementById("screen2").classList.remove("active");
-  document.getElementById("screen3").classList.add("active");
-}
+// Trigger on hover + click
+noBtn.addEventListener("mouseenter", moveNoSmooth);
+noBtn.addEventListener("click", moveNoSmooth);
 
-/* Floating sparkles */
-setInterval(()=>{
-  const sparkle=document.createElement("div");
-  sparkle.className="sparkle";
-  sparkle.innerHTML="✨";
-  sparkle.style.left=Math.random()*100+"vw";
-  sparkle.style.bottom="-20px";
-  document.body.appendChild(sparkle);
-  setTimeout(()=>sparkle.remove(),6000);
-},800);
 </script>
+
+
 
 </body>
 </html>
