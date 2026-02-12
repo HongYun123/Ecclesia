@@ -10,65 +10,69 @@
 <style>
 body{
   margin:0;
-  min-height:100vh;
+  height:100vh;
+  overflow:hidden;
   background:url('background.jpg') center/cover fixed;
   font-family:'Press Start 2P', monospace;
   color:white;
-  text-align:center;
-  overflow:hidden;
 }
 
-/* Unique dreamy overlay */
+/* Soft dreamy overlay */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:linear-gradient(
     to bottom,
-    rgba(30,0,60,0.5),
-    rgba(255,100,180,0.25)
+    rgba(40,0,80,0.45),
+    rgba(255,80,160,0.25)
   );
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(3px);
   z-index:0;
 }
 
-.container{
+/* HEADER (Protected Area) */
+.header{
   position:relative;
-  z-index:2;
-  padding:80px 20px;
-}
-
-h1{
+  z-index:3;
+  text-align:center;
+  padding-top:60px;
   font-size:18px;
-  margin-bottom:60px;
   text-shadow:3px 3px 0 black;
 }
 
-/* Memory text styling */
+/* Floating Memory Text */
 .memory{
-  opacity:0;
-  transform:translateY(20px);
-  transition:1.2s ease;
-  margin:30px auto;
-  max-width:700px;
+  position:absolute;
   font-size:11px;
+  max-width:400px;
+  text-align:center;
   line-height:2;
+  opacity:0.85;
+  transition:.4s;
+  z-index:2;
   cursor:pointer;
-}
-
-.memory.show{
-  opacity:1;
-  transform:translateY(0);
+  animation:drift 25s ease-in-out infinite alternate;
 }
 
 .memory:hover{
   color:#ff9bd6;
-  text-shadow:0 0 10px rgba(255,120,200,0.9);
+  text-shadow:0 0 12px rgba(255,120,200,0.9);
+  transform:scale(1.08);
+}
+
+/* Smooth drifting animation */
+@keyframes drift{
+  from { transform:translateY(0px); }
+  to { transform:translateY(-20px); }
 }
 
 /* Back button */
 .back{
-  margin-top:60px;
+  position:fixed;
+  bottom:60px;
+  left:50%;
+  transform:translateX(-50%);
   padding:12px 28px;
   background:linear-gradient(145deg,#ff4d8d,#ff2e7a);
   border:none;
@@ -76,14 +80,15 @@ h1{
   color:white;
   cursor:pointer;
   box-shadow:0 4px 0 #a00040;
+  z-index:3;
   transition:.2s;
 }
 
 .back:hover{
-  transform:translateY(-3px);
+  transform:translateX(-50%) translateY(-3px);
 }
 
-/* Floating sparkles */
+/* Sparkles */
 .sparkle{
   position:fixed;
   font-size:14px;
@@ -101,31 +106,41 @@ h1{
 
 <body>
 
-<div class="container">
-  <h1>THINGS I NOTICE ABOUT YOU 💕</h1>
-
-  <div class="memory">The way your laugh sounds when you're caught off guard.</div>
-  <div class="memory">How your eyes light up when you talk about what you love.</div>
-  <div class="memory">The way your hand fits perfectly in mine.</div>
-  <div class="memory">The tiny things you do that make ordinary moments magical.</div>
-  <div class="memory">Every memory with you feels like a favorite song.</div>
-  <div class="memory">The calm I feel just sitting next to you.</div>
-
-  <button class="back" onclick="goBack()">← Back</button>
+<div class="header">
+  THINGS I NOTICE ABOUT YOU 💕
 </div>
+
+<!-- Floating Memories -->
+<div class="memory" style="top:200px; left:10%;">
+  The way your laugh sounds when you're caught off guard.
+</div>
+
+<div class="memory" style="top:280px; right:10%;">
+  How your eyes light up when you talk about what you love.
+</div>
+
+<div class="memory" style="top:360px; left:25%;">
+  The way your hand fits perfectly in mine.
+</div>
+
+<div class="memory" style="top:440px; right:20%;">
+  The tiny things you do that make ordinary moments magical.
+</div>
+
+<div class="memory" style="top:520px; left:15%;">
+  Every memory with you feels like a favorite song.
+</div>
+
+<div class="memory" style="top:600px; right:15%;">
+  The calm I feel just sitting next to you.
+</div>
+
+<button class="back" onclick="goBack()">← Back</button>
 
 <script>
 function goBack(){
   window.location.href="desktop.html";
 }
-
-/* Stagger reveal animation */
-const memories = document.querySelectorAll('.memory');
-memories.forEach((el,i)=>{
-  setTimeout(()=>{
-    el.classList.add('show');
-  }, i*1200);
-});
 
 /* Floating sparkles */
 setInterval(()=>{
@@ -136,7 +151,7 @@ setInterval(()=>{
   sparkle.style.bottom="-20px";
   document.body.appendChild(sparkle);
   setTimeout(()=>sparkle.remove(),8000);
-},900);
+},1000);
 </script>
 
 </body>
