@@ -17,21 +17,19 @@ body{
   color:white;
 }
 
-/* Soft dreamy overlay */
+/* Soft overlay */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:linear-gradient(
-    to bottom,
+  background:linear-gradient(to bottom,
     rgba(40,0,80,0.45),
-    rgba(255,80,160,0.25)
-  );
+    rgba(255,80,160,0.25));
   backdrop-filter:blur(3px);
   z-index:0;
 }
 
-/* HEADER (Protected Area) */
+/* Header */
 .header{
   position:relative;
   z-index:3;
@@ -41,30 +39,22 @@ body::before{
   text-shadow:3px 3px 0 black;
 }
 
-/* Floating Memory Text */
-.memory{
+/* Floating text */
+.floating-text{
   position:absolute;
   font-size:11px;
-  max-width:400px;
+  max-width:300px;
   text-align:center;
-  line-height:2;
-  opacity:0.85;
-  transition:.4s;
+  line-height:1.8;
+  text-shadow:0 0 10px rgba(255,150,200,0.8);
+  opacity:0;
+  animation:fadeIn 2s ease forwards;
   z-index:2;
-  cursor:pointer;
-  animation:drift 25s ease-in-out infinite alternate;
 }
 
-.memory:hover{
-  color:#ff9bd6;
-  text-shadow:0 0 12px rgba(255,120,200,0.9);
-  transform:scale(1.08);
-}
-
-/* Smooth drifting animation */
-@keyframes drift{
-  from { transform:translateY(0px); }
-  to { transform:translateY(-20px); }
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.8);}
+  to{opacity:1; transform:scale(1);}
 }
 
 /* Back button */
@@ -87,20 +77,6 @@ body::before{
 .back:hover{
   transform:translateX(-50%) translateY(-3px);
 }
-
-/* Sparkles */
-.sparkle{
-  position:fixed;
-  font-size:14px;
-  animation:floatUp 8s linear infinite;
-  opacity:.7;
-  z-index:1;
-}
-
-@keyframes floatUp{
-  from{ transform:translateY(0); opacity:1; }
-  to{ transform:translateY(-120vh); opacity:0; }
-}
 </style>
 </head>
 
@@ -110,48 +86,71 @@ body::before{
   THINGS I NOTICE ABOUT YOU 💕
 </div>
 
-<!-- Floating Memories -->
-<div class="memory" style="top:200px; left:10%;">
-  The way your laugh sounds when you're caught off guard.
-</div>
-
-<div class="memory" style="top:280px; right:10%;">
-  How your eyes light up when you talk about what you love.
-</div>
-
-<div class="memory" style="top:360px; left:25%;">
-  The way your hand fits perfectly in mine.
-</div>
-
-<div class="memory" style="top:440px; right:20%;">
-  The tiny things you do that make ordinary moments magical.
-</div>
-
-<div class="memory" style="top:520px; left:15%;">
-  Every memory with you feels like a favorite song.
-</div>
-
-<div class="memory" style="top:600px; right:15%;">
-  The calm I feel just sitting next to you.
-</div>
-
-<button class="back" onclick="goBack()">← Back</button>
+<button class="back" onclick="history.back()">← Back</button>
 
 <script>
-function goBack(){
-  window.location.href="desktop.html";
+
+const messages = [
+"The way your laugh sounds when you're caught off guard.",
+"How your eyes light up when you talk about what you love.",
+"The way your hand fits perfectly in mine.",
+"The tiny things you do that make ordinary moments magical.",
+"Every memory with you feels like a favorite song.",
+"The calm I feel just sitting next to you."
+];
+
+const header = document.querySelector(".header");
+const backBtn = document.querySelector(".back");
+
+function createFloatingText(text){
+
+  const div = document.createElement("div");
+  div.className="floating-text";
+  div.innerText=text;
+  document.body.appendChild(div);
+
+  const headerHeight = header.offsetHeight + 80;
+  const bottomLimit = window.innerHeight - backBtn.offsetHeight - 120;
+
+  let x = Math.random() * (window.innerWidth - 300);
+  let y = headerHeight + Math.random() * (bottomLimit - headerHeight);
+
+  let dx = (Math.random()*0.3)+0.2;
+  let dy = (Math.random()*0.25)+0.15;
+
+  if(Math.random() < 0.5) dx *= -1;
+  if(Math.random() < 0.5) dy *= -1;
+
+  function animate(){
+
+    x += dx;
+    y += dy;
+
+    if(x <= 0 || x >= window.innerWidth - 300){
+      dx *= -1;
+    }
+
+    if(y <= headerHeight){
+      dy *= -1;
+      y = headerHeight + 2;
+    }
+
+    if(y >= bottomLimit){
+      dy *= -1;
+      y = bottomLimit - 2;
+    }
+
+    div.style.left = x + "px";
+    div.style.top = y + "px";
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
 
-/* Floating sparkles */
-setInterval(()=>{
-  const sparkle=document.createElement("div");
-  sparkle.className="sparkle";
-  sparkle.innerHTML="✨";
-  sparkle.style.left=Math.random()*100+"vw";
-  sparkle.style.bottom="-20px";
-  document.body.appendChild(sparkle);
-  setTimeout(()=>sparkle.remove(),8000);
-},1000);
+messages.forEach(msg => createFloatingText(msg));
+
 </script>
 
 </body>
