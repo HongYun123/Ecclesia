@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>A Letter From My Heart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:url('https://i.imgur.com/Xd2s5bF.png') center/cover no-repeat fixed;
+  font-family:'Courier New',monospace;
+  padding:50px;
+}
+
+.box{
+  background:rgba(0,0,0,0.7);
+  padding:30px;
+  border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>A LETTER FROM MY HEART</h2>
+<p id="text"></p>
+<button onclick="back()">⬅ Back</button>
+</div>
+
+<script>
+const message="My love, every day with you feels like magic. You are my peace, my laughter, my forever.";
+let i=0;
+function type(){
+  if(i<message.length){
+    document.getElementById("text").innerHTML+=message.charAt(i);
+    i++;
+    setTimeout(type,40);
+  }
+}
+type();
+
+function back(){
+  window.location.href="desktop.html";
+}
+</script>
+
+</body>
+</html>
