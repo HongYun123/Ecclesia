@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forever ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:black;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  overflow:hidden;
+}
+h1{
+  font-size:40px;
+}
+.confetti{
+  position:fixed;
+  top:-10px;
+  width:10px;
+  height:10px;
+  background:white;
+  animation:fall 3s linear infinite;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div>
+<h1>Forever Starts With Us ❤️</h1>
+<p>You’re stuck with me 😌</p>
+</div>
+
+<script>
+for(let i=0;i<50;i++){
+  const c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.background=["#ff4d6d","#ffffff","#ff7eb3"][Math.floor(Math.random()*3)];
+  document.body.appendChild(c);
+}
+</script>
+
+</body>
+</html>
