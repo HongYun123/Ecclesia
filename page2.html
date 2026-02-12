@@ -2,45 +2,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nope 😌</title>
+<title>You Thought? 😏</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:black;
-  color:white;
+  font-family:'Comic Sans MS',cursive;
+  background:#ffe6f2;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   text-align:center;
 }
-h1{
-  font-size:35px;
+
+.card{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
+
 button{
   padding:12px 25px;
   border:none;
-  border-radius:25px;
-  background:#ff4d6d;
+  border-radius:30px;
+  background:#ff4d8d;
   color:white;
-  margin-top:20px;
+  margin:10px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<div>
-  <h1>You thought I was asking? 🤨</h1>
-  <h2>Nope. You’re already mine 😌❤️</h2>
-  <button onclick="next()">Continue</button>
+<div class="card" id="card">
+  <h2>You thought I was asking? 🤔</h2>
+  <button onclick="reveal()">Click Me</button>
 </div>
 
 <script>
+function reveal(){
+  document.getElementById("card").innerHTML=`
+    <h2>Nope. You're already mine 😌❤️</h2>
+    <p>There was never a choice.</p>
+    <button onclick="next()">Continue ➡</button>
+  `;
+}
+
 function next(){
   window.location.href="page3.html";
 }
