@@ -102,53 +102,37 @@
     <button class="no" onclick="noClicked()">NO 🙈</button>
   </div>
 
-  <script>
-    // Floating hearts continuously
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 15 + "px";
-      document.body.appendChild(heart);
+<script>
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
-    }, 500);
+    setTimeout(() => heart.remove(), 5000);
+  }, 500);
 
-    function yesClicked() {
-      const card = document.getElementById("card");
-      card.innerHTML = `
-        <h1>YAY!!! 🎉💖</h1>
-        <p>You just made me the happiest person.</p>
-        <p>I love you ❤️</p>
-        <p>Happy Valentine’s Day 🥰</p>
-      `;
+  function yesClicked() {
+    const card = document.getElementById("card");
+    card.innerHTML = `
+      <h1>YAY!!! 🎉💖</h1>
+      <p>You just made me the happiest person.</p>
+      <p>I love you ❤️</p>
+      <p>Happy Valentine’s Day 🥰</p>
+    `;
+  }
 
-      // Confetti effect
-      for (let i = 0; i < 40; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.background =
-          ["#ff4d6d", "#ffffff", "#ffd6e0", "#ff7eb3"][
-            Math.floor(Math.random() * 4)
-          ];
-        document.body.appendChild(confetti);
+  function noClicked() {
+    const btn = document.querySelector(".no");
 
-        setTimeout(() => {
-          confetti.remove();
-        }, 3000);
-      }
-    }
+    btn.style.position = "fixed";
+    btn.style.top = Math.random() * 80 + "vh";
+    btn.style.left = Math.random() * 80 + "vw";
+  }
+</script>
 
-    function noClicked() {
-      const btn = document.querySelector(".no");
-      btn.style.position = "absolute";
-      btn.style.top = Math.random() * 80 + "vh";
-      btn.style.left = Math.random() * 80 + "vw";
-    }
-  </script>
 </body>
 </html>
